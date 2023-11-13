@@ -22,7 +22,7 @@ model User {
 model Textbook {
   id Int @id @default(autoincrement())
   textbookName String
-  textbookPhoto String
+  discription String
   sellerId Int
   seller User @relation(fields: [sellerId],references: [id])
   goods Good[]

@@ -12,7 +12,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Textbook" (
     "id" SERIAL NOT NULL,
     "textbookName" TEXT NOT NULL,
-    "textbookPhoto" TEXT NOT NULL,
+    "discription" TEXT NOT NULL,
     "sellerId" INTEGER NOT NULL,
 
     CONSTRAINT "Textbook_pkey" PRIMARY KEY ("id")
