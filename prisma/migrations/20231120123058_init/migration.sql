@@ -2,6 +2,7 @@
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
+    "photoUrl" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "school" TEXT NOT NULL,
 
@@ -12,7 +13,9 @@ CREATE TABLE "User" (
 CREATE TABLE "Textbook" (
     "id" SERIAL NOT NULL,
     "textbookName" TEXT NOT NULL,
+    "textbookImg" TEXT NOT NULL,
     "discription" TEXT NOT NULL,
+    "schoolCode" TEXT NOT NULL,
     "sellerId" INTEGER NOT NULL,
 
     CONSTRAINT "Textbook_pkey" PRIMARY KEY ("id")

@@ -13,6 +13,7 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   username String
+  photoUrl String
   email String @unique
   school String
   textbooks Textbook[]
@@ -22,7 +23,9 @@ model User {
 model Textbook {
   id Int @id @default(autoincrement())
   textbookName String
+  textbookImg String
   discription String
+  schoolCode String
   sellerId Int
   seller User @relation(fields: [sellerId],references: [id])
   goods Good[]
