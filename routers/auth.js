@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 router.post("/get", async (req, res) => {
   const { email } = req.body;
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { email },
   });
   return res.json({ user });

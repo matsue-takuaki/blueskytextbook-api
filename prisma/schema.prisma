@@ -18,6 +18,8 @@ model User {
   school String
   textbooks Textbook[]
   goods Good[]
+  Message Message[]
+  connection Connection[]
 }
 
 model Textbook {
@@ -29,6 +31,7 @@ model Textbook {
   sellerId Int
   seller User @relation(fields: [sellerId],references: [id])
   goods Good[]
+  messages Messages[]
 }
 
 model Good {
@@ -36,5 +39,34 @@ model Good {
   sellerId Int
   seller User @relation(fields: [sellerId],references: [id])
   textbookId Int
+  textbook Textbook @relation(fields: [textbookId],references: [id],onDelete: Cascade)
+}
+
+model Connection {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId],references: [id])
+  messagesId Int
+  messages Messages @relation(fields: [messagesId],references: [id])
+}
+
+model Messages {
+  id Int @id @default(autoincrement())
+  textbookId Int
+  sellerId Int
+  buyerId Int
   textbook Textbook @relation(fields: [textbookId],references: [id])
+  connection Connection[]
+  message Message[]
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+  message String
+  createdAt DateTime @default(now())
+  confirm Boolean @default(false)
+  senderId Int
+  sender User @relation(fields: [senderId],references: [id])
+  messageId Int
+  messages Messages @relation(fields: [messageId],references: [id])
 }

@@ -57,14 +57,30 @@ router.post("/get_mytextbooks", async (req, res) => {
   const { userId } = req.body;
   try {
     const textbooks = await prisma.textbook.findMany({
-      where:{
-        sellerId:userId
+      where: {
+        sellerId: userId,
       },
       include: {
         seller: true,
       },
     });
     return res.json(textbooks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "サーバーエラーです" });
+  }
+});
+
+//出品削除api
+router.post("/delete_textbook", async (req, res) => {
+  const { id } = req.body;
+  try {
+    const textbook = await prisma.textbook.delete({
+      where:{
+        id
+      }
+    });
+    return res.json(textbook);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "サーバーエラーです" });

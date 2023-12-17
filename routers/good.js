@@ -41,10 +41,34 @@ router.post("/delete_favorite", async (req, res) => {
   const { sellerId, textbookId } = req.body;
   try {
     const favorite = await prisma.good.deleteMany({
-      where:{
+      where: {
         sellerId: sellerId,
         textbookId: textbookId,
-      }
+      },
+    });
+    return res.json({ favorite });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "サーバーエラーです" });
+  }
+});
+
+//いいねした商品取得api
+router.post("/get_favoriteTextbook", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const favorite = await prisma.good.findMany({
+      where: {
+        sellerId: userId,
+      },
+      include: {
+        textbook: true,
+        textbook: {
+          include: {
+            seller: true,
+          },
+        },
+      },
     });
     return res.json({ favorite });
   } catch (err) {
